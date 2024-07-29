@@ -10,7 +10,7 @@ export default function Header() {
   console.log(pathname);
 
   return (
-    <header className="flex flex-col p-10 justify-between items-center bg-black text-white shadow-slate-500 shadow-md">
+    <header className="flex flex-col p-10 justify-between items-center bg-black text-white">
       <h1 className="text-2xl font-bold">bugrayuksel</h1>
       <nav>
         <ul className="flex space-x-4 mt-10">
