@@ -31,7 +31,8 @@ function BlogPage() {
 
   if (loading) return <Spinner />;
 
-  if (blogs.length === 0) return <p>Blogs Not Found.</p>;
+  if (blogs.length === 0)
+    return <p className="flex justify-center mt-5">Blogs Not Found.</p>;
 
   return (
     <div className="container mx-auto">
