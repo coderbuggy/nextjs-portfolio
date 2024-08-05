@@ -2,13 +2,18 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth } from "@/firebase/firebaseConfig"; // Firebase konfigürasyonunuzu import edin
+import { auth, db } from "@/firebase/firebaseConfig";
 import { Button } from "@/components/ui/button";
 import dynamic from "next/dynamic";
+import Spinner from "@/components/Spinner";
+import { addDoc, collection } from "firebase/firestore";
+
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 import "react-quill/dist/quill.snow.css";
+import { Input } from "@/components/ui/input";
 
 export default function WritePage() {
+  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [user, loading] = useAuthState(auth);
   const [userSession, setUserSession] = useState<string | null>(null);
@@ -16,8 +21,6 @@ export default function WritePage() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      // Tarayıcı ortamında çalıştığından emin olun
-      //sessionStorage hatası düzeltmek için :
       const session = sessionStorage.getItem("user");
       setUserSession(session);
     }
@@ -27,37 +30,44 @@ export default function WritePage() {
     if (!loading && (!user || !userSession)) {
       router.push("/login");
     }
-  }, [user, loading, userSession]);
+  }, [loading, user, userSession, router]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Spinner />;
+
+  // İçeriğin yalnızca oturum açmış kullanıcılar tarafından görülmesini sağlar
+  if (!user || !userSession) return null;
 
   const handleChange = (value: any) => {
     setContent(value);
   };
 
-  const savePost = (content: any) => {
-    console.log("Content saved:", content);
-    setContent("");
+  const savePost = async (content: any) => {
+    try {
+      const blogPost = await addDoc(collection(db, "blogs"), {
+        title: title,
+        date: new Date(),
+        content: content,
+      });
+      console.log("Post saved with ID:", blogPost.id);
+    } catch (error) {
+      console.error("Error saving post:", error);
+    } finally {
+      setContent("");
+      setTitle("");
+    }
   };
-
-  const formats = [
-    "header",
-    "bold",
-    "italic",
-    "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
-    "image",
-  ];
 
   return (
     <div className="p-10">
       <div>
-        <ReactQuill formats={formats} value={content} onChange={handleChange} />
+        <Input
+          placeholder="Blog Title"
+          value={title}
+          onChange={(e: any) => setTitle(e.target.value)}
+        />
+      </div>
+      <div className="mt-3">
+        <ReactQuill value={content} onChange={handleChange} />
       </div>
       <div className="flex items-center justify-end mt-10">
         <Button variant="secondary" onClick={() => savePost(content)}>

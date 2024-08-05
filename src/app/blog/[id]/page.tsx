@@ -1,41 +1,51 @@
 "use client";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
-
-// Örnek veri (gerçek veriyi API veya veritabanından çekeceksiniz)
-const blogData = {
-  "1": {
-    title: "Blog 1 Title",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure voluptates voluptatum cum voluptatibus libero ipsa officiis minima cupiditate sunt sapiente, non qui fugit atque nobis odio. Porro nam sequi iste?",
-    date: "2024-07-29",
-  },
-  "2": {
-    title: "Blog 2 Title",
-    content: "Content for blog post 2",
-    date: "2024-07-28",
-  },
-  "3": {
-    title: "Blog 3 Title",
-    content: "Content for blog post 3",
-    date: "2024-07-27",
-  },
-};
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase/firebaseConfig";
+import Spinner from "@/components/Spinner";
+import DOMPurify from "dompurify";
 
 function BlogPost() {
-  const params = useParams<{
-    id: any;
-    tag: string;
-    item: string;
-  }>();
-  const blog = blogData[params.id];
-  if (!blog) {
-    return <p>Loading...</p>;
-  }
+  const params = useParams<{ id: string }>();
+  const [blog, setBlog] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const docRef = doc(db, "blogs", params.id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setBlog(docSnap.data());
+        } else {
+          console.error("No such document!");
+        }
+      } catch (error) {
+        console.error("Error fetching blog:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [params.id]);
+
+  if (loading) return <Spinner />;
+
+  if (!blog) return <p>Blog Not Found.</p>;
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-center text-3xl font-bold mb-4">{blog.title}</h2>
-      <p className="text-center text-gray-500 mb-4">{blog.date}</p>
-      <p>{blog.content}</p>
+      <p className="text-center text-gray-500 mb-4">
+        {new Date(blog.date.seconds * 1000).toDateString()}
+      </p>
+      <div
+        className="prose max-w-none"
+        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }}
+      ></div>
     </div>
   );
 }

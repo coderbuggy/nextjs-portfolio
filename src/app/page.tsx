@@ -10,7 +10,7 @@ export default function Home() {
           width={300}
           height={300}
           alt="html"
-          className="flex-shrink-0 rounded-full"
+          className="flex-shrink-0 rounded-full drop-shadow-glow"
         />
       </div>
       <div className="p-10">

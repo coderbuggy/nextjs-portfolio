@@ -13,7 +13,13 @@ export default function Header() {
 
   return (
     <header className="flex flex-col p-10 justify-between items-center bg-black text-white">
-      <h1 className="text-2xl font-bold">bugrayuksel.dev</h1>
+      <h1
+        className={`text-2xl font-bold ${
+          user ? "text-blue-600" : "text-white"
+        }`}
+      >
+        bugrayuksel.dev
+      </h1>
       <nav>
         <ul className="flex space-x-4 mt-10">
           <li>
@@ -56,18 +62,6 @@ export default function Header() {
               /contact
             </Link>
           </li>
-          {user && (
-            <li>
-              <Link
-                className={`relative pb-2 ${
-                  isActive("/write") ? "border-b-2 border-blue-500" : ""
-                }`}
-                href="/write"
-              >
-                /write
-              </Link>
-            </li>
-          )}
         </ul>
       </nav>
     </header>

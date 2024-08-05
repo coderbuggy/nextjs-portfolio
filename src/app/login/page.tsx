@@ -1,4 +1,5 @@
 "use client";
+import Spinner from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -22,12 +23,14 @@ export default function LoginPage() {
   const [signInWithEmailAndPassword, user, loading] =
     useSignInWithEmailAndPassword(auth);
   const [error, setError] = useState("");
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
   const router = useRouter();
 
   const onSubmit: SubmitHandler<FormValues> = async (data) => {
     try {
       const res = await signInWithEmailAndPassword(data.email, data.password);
       sessionStorage.setItem("user", "true");
+      setLoadingSpinner(loading);
       if (!res) {
         alert("Login failed");
         router.push("/login");
@@ -37,16 +40,19 @@ export default function LoginPage() {
     } catch (error) {
       console.error(error);
       setError("Login failed, please try again.");
+    } finally {
+      setLoadingSpinner(loading);
     }
   };
 
+  if (loading) return <Spinner />;
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-900">
+    <div className="flex items-center justify-center p-16">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg"
       >
-        <h2 className="text-2xl font-bold text-center text-white">Giriş Yap</h2>
         <div>
           <Label htmlFor="email" className="text-white">
             mail
