@@ -19,23 +19,14 @@ export default function WritePage() {
   const [userSession, setUserSession] = useState<string | null>(null);
   const router = useRouter();
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const session = sessionStorage.getItem("user");
-      setUserSession(session);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!loading && (!user || !userSession)) {
-      router.push("/login");
-    }
-  }, [loading, user, userSession, router]);
-
   if (loading) return <Spinner />;
 
   // İçeriğin yalnızca oturum açmış kullanıcılar tarafından görülmesini sağlar
-  if (!user || !userSession) return null;
+  debugger;
+  if (!user) {
+    router.push("/login");
+    return;
+  }
 
   const handleChange = (value: any) => {
     setContent(value);
@@ -59,21 +50,27 @@ export default function WritePage() {
 
   return (
     <div className="p-10">
-      <div>
-        <Input
-          placeholder="Blog Title"
-          value={title}
-          onChange={(e: any) => setTitle(e.target.value)}
-        />
-      </div>
-      <div className="mt-3">
-        <ReactQuill value={content} onChange={handleChange} />
-      </div>
-      <div className="flex items-center justify-end mt-10">
-        <Button variant="secondary" onClick={() => savePost(content)}>
-          Save Post
-        </Button>
-      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <div>
+            <Input
+              placeholder="Blog Title"
+              value={title}
+              onChange={(e: any) => setTitle(e.target.value)}
+            />
+          </div>
+          <div className="mt-3">
+            <ReactQuill value={content} onChange={handleChange} />
+          </div>
+          <div className="flex items-center justify-end mt-10">
+            <Button variant="secondary" onClick={() => savePost(content)}>
+              Save Post
+            </Button>
+          </div>
+        </>
+      )}
     </div>
   );
 }
