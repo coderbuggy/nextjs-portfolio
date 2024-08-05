@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
-import AuthProvider from "@/providers/AuthProvider";
 
 const roboto = Roboto_Mono({ subsets: ["latin"] });
 
@@ -18,14 +17,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <AuthProvider>
-        <body className={roboto.className}>
-          <header>
-            <Header />
-          </header>
-          <main>{children}</main>
-        </body>
-      </AuthProvider>
+      <body className={roboto.className}>
+        <header>
+          <Header />
+        </header>
+        <main>{children}</main>
+      </body>
     </html>
   );
 }

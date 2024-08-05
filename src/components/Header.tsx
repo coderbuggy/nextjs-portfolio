@@ -1,13 +1,15 @@
 "use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/firebaseConfig"; // Firebase konfigürasyonunuzu import edin
 
 export default function Header() {
   const pathname = usePathname();
+  const [user] = useAuthState(auth);
 
   const isActive = (href: string) => pathname === href;
-
-  console.log(pathname);
 
   return (
     <header className="flex flex-col p-10 justify-between items-center bg-black text-white">
@@ -54,6 +56,18 @@ export default function Header() {
               /contact
             </Link>
           </li>
+          {user && (
+            <li>
+              <Link
+                className={`relative pb-2 ${
+                  isActive("/write") ? "border-b-2 border-blue-500" : ""
+                }`}
+                href="/write"
+              >
+                /write
+              </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
