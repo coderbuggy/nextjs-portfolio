@@ -629,9 +629,6 @@ video {
 .mt-5 {
   margin-top: 1.25rem;
 }
-.inline {
-  display: inline;
-}
 .flex {
   display: flex;
 }
@@ -760,10 +757,6 @@ video {
 .border-input {
   border-color: hsl(var(--input));
 }
-.border-white {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity));
-}
 .bg-background {
   background-color: hsl(var(--background));
 }
@@ -871,9 +864,6 @@ video {
 .font-semibold {
   font-weight: 600;
 }
-.italic {
-  font-style: italic;
-}
 .leading-none {
   line-height: 1;
 }
@@ -920,9 +910,6 @@ video {
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-.underline {
-  text-decoration-line: underline;
 }
 .underline-offset-4 {
   text-underline-offset: 4px;

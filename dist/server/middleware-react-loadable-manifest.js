@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app\\\\write\\\\page.tsx -> react-quill\":{\"id\":\"app\\\\write\\\\page.tsx -> react-quill\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_react-quill_lib_index_js.js\"]}}"
+self.__REACT_LOADABLE_MANIFEST="{\"app\\\\write\\\\page.tsx -> @toast-ui/react-editor\":{\"id\":\"app\\\\write\\\\page.tsx -> @toast-ui/react-editor\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_toast-ui_react-editor_dist_esm_index_js.js\"]}}"
