@@ -1,40 +1,24 @@
-"use client";
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebaseConfig";
-import Spinner from "@/components/Spinner";
-import DOMPurify from "dompurify";
 
-function BlogPost() {
-  const params = useParams<{ id: string }>();
-  const [blog, setBlog] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+export async function generateStaticParams() {
+  const querySnapshot = await getDocs(collection(db, "blogs"));
+  const paths = querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+  }));
 
-  useEffect(() => {
-    const fetchBlog = async () => {
-      try {
-        const docRef = doc(db, "blogs", params.id);
-        const docSnap = await getDoc(docRef);
+  return paths;
+}
 
-        if (docSnap.exists()) {
-          setBlog(docSnap.data());
-        } else {
-          console.error("No such document!");
-        }
-      } catch (error) {
-        console.error("Error fetching blog:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+export default async function BlogPost({ params }: { params: { id: string } }) {
+  const docRef = doc(db, "blogs", params.id);
+  const docSnap = await getDoc(docRef);
 
-    fetchBlog();
-  }, [params.id]);
+  if (!docSnap.exists()) {
+    return <p>Blog Not Found.</p>;
+  }
 
-  if (loading) return <Spinner />;
-
-  if (!blog) return <p>Blog Not Found.</p>;
+  const blog = docSnap.data();
 
   return (
     <div className="container mx-auto p-4">
@@ -44,10 +28,8 @@ function BlogPost() {
       </p>
       <div
         className="prose max-w-none"
-        dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.content) }}
+        dangerouslySetInnerHTML={{ __html: blog.content }}
       ></div>
     </div>
   );
 }
-
-export default BlogPost;
