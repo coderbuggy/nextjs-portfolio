@@ -62,7 +62,7 @@ export default function WritePage() {
             />
           </div>
           <div className="mt-3">
-            <ReactQuill value={content} onChange={handleChange} />
+            <ReactQuill theme="snow" value={content} onChange={handleChange} />
           </div>
           <div className="flex items-center justify-end mt-10">
             <Button variant="secondary" onClick={() => savePost(content)}>
