@@ -8,12 +8,10 @@ import { Button } from "@/components/ui/button";
 import Spinner from "@/components/Spinner";
 import { addDoc, collection } from "firebase/firestore";
 
-// // Dynamic import
-// const Editor = dynamic(
-//   () => import("@toast-ui/react-editor").then((mod) => mod.Editor),
-//   { ssr: false }
-// );
-import Editor from "react-simple-wysiwyg";
+const Editor = dynamic(
+  () => import("react-simple-wysiwyg").then((mod) => mod.Editor),
+  { ssr: false }
+);
 
 import { Input } from "@/components/ui/input";
 
