@@ -34,22 +34,21 @@ function WritePage() {
   if (loading) return <Spinner />;
 
   const savePost = async () => {
-    if (editorRef.current) {
-      // @ts-ignore: Unreachable code error
-      const contentHTML = editorRef.current.getInstance().getHTML();
-      try {
-        const blogPost = await addDoc(collection(db, "blogs"), {
-          title: title,
-          date: new Date(),
-          content: contentHTML,
-        });
-        console.log("Post saved with ID:", blogPost.id);
-      } catch (error) {
-        console.error("Error saving post:", error);
-      } finally {
-        setContent("");
-        setTitle("");
-      }
+    if (title === "" || content === "") {
+      return alert("Please enter a title or content.");
+    }
+    try {
+      const blogPost = await addDoc(collection(db, "blogs"), {
+        title: title,
+        date: new Date(),
+        content: content,
+      });
+      console.log("Post saved with ID:", blogPost.id);
+    } catch (error) {
+      console.error("Error saving post:", error);
+    } finally {
+      setContent("");
+      setTitle("");
     }
   };
 
@@ -66,7 +65,7 @@ function WritePage() {
           onChange={(e) => setTitle(e.target.value)}
         />
       </div>
-      <div className="mt-3">
+      <div className="mt-3 bg-white text-black">
         <Editor value={content} onChange={onChange} />
       </div>
       <div className="flex items-center justify-end mt-10">

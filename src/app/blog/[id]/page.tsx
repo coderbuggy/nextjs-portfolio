@@ -1,8 +1,14 @@
 import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "@/firebase/firebaseConfig";
-
 export async function generateStaticParams() {
   const querySnapshot = await getDocs(collection(db, "blogs"));
+
+  if (querySnapshot.empty) {
+    console.warn("No blogs found in the 'blogs' collection.");
+    // Boş koleksiyon durumunda varsayılan bir rota döndürebilirsiniz.
+    return [{ id: "default" }]; // Bu ID'ye sahip bir varsayılan sayfa yaratabilirsiniz.
+  }
+
   const paths = querySnapshot.docs.map((doc) => ({
     id: doc.id,
   }));
