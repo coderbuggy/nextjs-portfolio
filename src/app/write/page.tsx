@@ -8,10 +8,12 @@ import { Button } from "@/components/ui/button";
 import Spinner from "@/components/Spinner";
 import { addDoc, collection } from "firebase/firestore";
 
-const Editor = dynamic(
-  () => import("react-simple-wysiwyg").then((mod) => mod.Editor),
-  { ssr: false }
-);
+// // Dynamic import
+// const Editor = dynamic(
+//   () => import("@toast-ui/react-editor").then((mod) => mod.Editor),
+//   { ssr: false }
+// );
+import Editor from "react-simple-wysiwyg";
 
 import { Input } from "@/components/ui/input";
 
@@ -32,18 +34,22 @@ function WritePage() {
   if (loading) return <Spinner />;
 
   const savePost = async () => {
-    try {
-      const blogPost = await addDoc(collection(db, "blogs"), {
-        title: title,
-        date: new Date(),
-        content: content,
-      });
-      console.log("Post saved with ID:", blogPost.id);
-    } catch (error) {
-      console.error("Error saving post:", error);
-    } finally {
-      setContent("");
-      setTitle("");
+    if (editorRef.current) {
+      // @ts-ignore: Unreachable code error
+      const contentHTML = editorRef.current.getInstance().getHTML();
+      try {
+        const blogPost = await addDoc(collection(db, "blogs"), {
+          title: title,
+          date: new Date(),
+          content: contentHTML,
+        });
+        console.log("Post saved with ID:", blogPost.id);
+      } catch (error) {
+        console.error("Error saving post:", error);
+      } finally {
+        setContent("");
+        setTitle("");
+      }
     }
   };
 

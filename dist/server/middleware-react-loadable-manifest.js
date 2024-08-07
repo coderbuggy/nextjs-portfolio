@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST="{\"app\\\\write\\\\page.tsx -> react-simple-wysiwyg\":{\"id\":\"app\\\\write\\\\page.tsx -> react-simple-wysiwyg\",\"files\":[\"static/chunks/_app-pages-browser_node_modules_react-simple-wysiwyg_lib_index_es_mjs.js\"]}}"
