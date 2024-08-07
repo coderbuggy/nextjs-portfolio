@@ -1,16 +1,18 @@
 import IconSlider from "@/components/IconSlider";
 import Image from "next/image";
+import logo from "@/../public/logo.png";
 
 export default function Home() {
   return (
     <div className="container mx-auto px-4">
-      <div className="flex justify-center align-center mt-10">
+      <div className="flex justify-center align-center mt-10 ">
         <Image
-          src="https://kfscdn.api.np.km.playstation.net/8568633115798517044/1606481778301.png"
+          src={logo}
           width={300}
           height={300}
-          alt="html"
-          className="flex-shrink-0 rounded-full drop-shadow-glow"
+          alt="logo"
+          className="flex-shrink-0 rounded-full shadow-md shadow-slate-100"
+          priority={true}
         />
       </div>
       <div className="p-10">
