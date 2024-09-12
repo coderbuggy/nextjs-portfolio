@@ -27,7 +27,7 @@ export default async function BlogPost({ params }: { params: { id: string } }) {
   const blog = docSnap.data();
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container w-full p-4">
       <h2 className="text-center text-3xl font-bold mb-4">{blog.title}</h2>
       <p className="text-center text-gray-500 mb-4">
         {new Date(blog.date.seconds * 1000).toDateString()}

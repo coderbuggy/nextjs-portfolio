@@ -21,8 +21,8 @@ export default function Header() {
         bugrayuksel.dev
       </h1>
       <nav>
-        <ul className="flex space-x-4 mt-10">
-          <li>
+        <ul className="flex space-x-4 mt-10 list-none">
+          <li className="list-none">
             <Link
               className={`relative pb-2 ${
                 isActive("/") ? "border-b-2 border-blue-500" : ""
@@ -32,7 +32,7 @@ export default function Header() {
               /home
             </Link>
           </li>
-          <li>
+          <li className="list-none">
             <Link
               className={`relative pb-2 ${
                 isActive("/projects") ? "border-b-2 border-blue-500" : ""
@@ -42,7 +42,7 @@ export default function Header() {
               /projects
             </Link>
           </li>
-          <li>
+          {/* <li className="list-none">
             <Link
               className={`relative pb-2 ${
                 isActive("/blog") ? "border-b-2 border-blue-500" : ""
@@ -51,8 +51,8 @@ export default function Header() {
             >
               /blog
             </Link>
-          </li>
-          <li>
+          </li> */}
+          <li className="list-none">
             <Link
               className={`relative pb-2 ${
                 isActive("/contact") ? "border-b-2 border-blue-500" : ""
