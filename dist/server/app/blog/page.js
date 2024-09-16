@@ -89,7 +89,7 @@ module.exports = require("next/dist/compiled/next-server/app-page.runtime.dev.js
 
 /***/ }),
 
-/***/ "undici?4377":
+/***/ "undici":
 /*!*************************!*\
   !*** external "undici" ***!
   \*************************/
@@ -448,7 +448,7 @@ const __default__ = proxy.default;
 var __webpack_require__ = require("../../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc","vendor-chunks/@firebase","vendor-chunks/@grpc","vendor-chunks/firebase","vendor-chunks/protobufjs","vendor-chunks/long","vendor-chunks/@protobufjs","vendor-chunks/lodash.camelcase","vendor-chunks/tslib","vendor-chunks/react-firebase-hooks","vendor-chunks/idb"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fblog%2Fpage&page=%2Fblog%2Fpage&appPaths=%2Fblog%2Fpage&pagePath=private-next-app-dir%2Fblog%2Fpage.tsx&appDir=D%3A%5CDeveloping%5Cweb-development%5CReact%5Cportfolio-nextjs%5Cportfolio%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=D%3A%5CDeveloping%5Cweb-development%5CReact%5Cportfolio-nextjs%5Cportfolio&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=export&preferredRegion=&middlewareConfig=e30%3D!")));
+var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc","vendor-chunks/@firebase","vendor-chunks/@grpc","vendor-chunks/firebase","vendor-chunks/protobufjs","vendor-chunks/long","vendor-chunks/@protobufjs","vendor-chunks/react-firebase-hooks","vendor-chunks/lodash.camelcase","vendor-chunks/tslib","vendor-chunks/idb"], () => (__webpack_exec__("(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?name=app%2Fblog%2Fpage&page=%2Fblog%2Fpage&appPaths=%2Fblog%2Fpage&pagePath=private-next-app-dir%2Fblog%2Fpage.tsx&appDir=D%3A%5CDeveloping%5Cweb-development%5CReact%5Cportfolio-nextjs%5Cportfolio%5Csrc%5Capp&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&rootDir=D%3A%5CDeveloping%5Cweb-development%5CReact%5Cportfolio-nextjs%5Cportfolio&isDev=true&tsconfigPath=tsconfig.json&basePath=&assetPrefix=&nextConfigOutput=export&preferredRegion=&middlewareConfig=e30%3D!")));
 module.exports = __webpack_exports__;
 
 })();

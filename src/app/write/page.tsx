@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/firebase/firebaseConfig";
 import Spinner from "@/components/Spinner";
-
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { addDoc, collection } from "firebase/firestore";
@@ -24,8 +23,6 @@ function WritePage() {
   }, [user, loading, router]);
 
   if (loading) return <Spinner />;
-
-  const hangleOnUpdate = () => {};
 
   const savePost = async () => {
     if (title === "" || content === "") {
