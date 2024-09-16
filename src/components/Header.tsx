@@ -42,7 +42,7 @@ export default function Header() {
               /projects
             </Link>
           </li>
-          {/* <li className="list-none">
+          <li className="list-none">
             <Link
               className={`relative pb-2 ${
                 isActive("/blog") ? "border-b-2 border-blue-500" : ""
@@ -51,7 +51,7 @@ export default function Header() {
             >
               /blog
             </Link>
-          </li> */}
+          </li>
           <li className="list-none">
             <Link
               className={`relative pb-2 ${
