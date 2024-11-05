@@ -4,11 +4,14 @@ import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, db } from "@/firebase/firebaseConfig";
 import Spinner from "@/components/Spinner";
-import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { addDoc, collection } from "firebase/firestore";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+// Dynamically import ReactQuill with client-side rendering only
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 function WritePage() {
   const [title, setTitle] = useState<string>("");
